@@ -37,9 +37,15 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(binding.toolbar);
 
-        String[] projection = { ActivitiesContract.Columns.ACTIVITIES_NAME, ActivitiesContract.Columns.ACTIVITIES_DESCRIPTION};
+        String[] projection = { ActivitiesContract.Columns._ID,
+                                ActivitiesContract.Columns.ACTIVITIES_NAME,
+                                ActivitiesContract.Columns.ACTIVITIES_DESCRIPTION,
+                                ActivitiesContract.Columns.ACTIVITIES_SORT_ORDER };
+
+
         ContentResolver contentResolver = getContentResolver();
-        Cursor cursor = contentResolver.query(ActivitiesContract.CONTENT_URI, projection,null,null, ActivitiesContract.Columns.ACTIVITIES_NAME);
+        Cursor cursor = contentResolver.query(ActivitiesContract.CONTENT_URI,
+                projection,null,null, ActivitiesContract.Columns.ACTIVITIES_NAME);
 
         // Se o cursor não for igual a nulo:
         if (cursor != null) {
