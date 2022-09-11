@@ -1,8 +1,10 @@
 package com.example.activitytimer;
 
 import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -44,6 +46,14 @@ public class MainActivity extends AppCompatActivity {
 
 
         ContentResolver contentResolver = getContentResolver();
+
+        // Inserindo dados para teste via ContentValues
+        ContentValues values = new ContentValues();
+        values.put(ActivitiesContract.Columns.ACTIVITIES_NAME, "Atividade 1");
+        values.put(ActivitiesContract.Columns.ACTIVITIES_DESCRIPTION, "Descrição 1");
+        values.put(ActivitiesContract.Columns.ACTIVITIES_SORT_ORDER, 1);
+        Uri uri = contentResolver.insert(ActivitiesContract.CONTENT_URI, values);
+
         Cursor cursor = contentResolver.query(ActivitiesContract.CONTENT_URI,
                 projection,null,null, ActivitiesContract.Columns.ACTIVITIES_NAME);
 
@@ -55,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                 for (int i=0; i<cursor.getColumnCount(); i++) {
                     Log.d(TAG, "onCreate: " + cursor.getColumnName(i) + ": " + cursor.getString(i));
                 }
-                Log.d(TAG, "onCreate: teste===teste===teste===teste");
+                Log.d(TAG, "onCreate: teste");
             }
         }
 
