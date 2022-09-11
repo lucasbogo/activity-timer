@@ -17,4 +17,5 @@
     <string name="menumain_settings">Configurações</string>
     <string name="menumain_showAbout">Autor</string>
     <string name="menumain_generate">Gerar Dados</string>
+    <string name="no_activity_message">Nenhuma Atividade Selecionada</string>
 </resources>
