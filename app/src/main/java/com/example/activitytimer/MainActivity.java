@@ -48,8 +48,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    making changes to try to fix git this sucks, yo!
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
