@@ -49,10 +49,11 @@ public class MainActivity extends AppCompatActivity {
 
         // Inserindo dados para teste via ContentValues
         ContentValues values = new ContentValues();
-        values.put(ActivitiesContract.Columns.ACTIVITIES_NAME, "Atividade 1");
+
+        /*values.put(ActivitiesContract.Columns.ACTIVITIES_NAME, "Atividade 1");
         values.put(ActivitiesContract.Columns.ACTIVITIES_DESCRIPTION, "Descrição 1");
         values.put(ActivitiesContract.Columns.ACTIVITIES_SORT_ORDER, 1);
-        Uri uri = contentResolver.insert(ActivitiesContract.CONTENT_URI, values);
+        Uri uri = contentResolver.insert(ActivitiesContract.CONTENT_URI, values);*/
 
         Cursor cursor = contentResolver.query(ActivitiesContract.CONTENT_URI,
                 projection,null,null, ActivitiesContract.Columns.ACTIVITIES_NAME);
