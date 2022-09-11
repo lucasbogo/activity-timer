@@ -128,13 +128,85 @@ public class AppProvider extends ContentProvider {
     @Nullable
     @Override
     public String getType(@NonNull Uri uri) {
+        final int match = sUriMatcher.match(uri);
+        Log.d(TAG, "query: match é " + match);
+
+        SQLiteQueryBuilder sqLiteQueryBuilder = new SQLiteQueryBuilder();
+
+        switch (match) {
+            case ACTIVITIES:
+                sqLiteQueryBuilder.setTables(ActivitiesContract.TABLE_NAME);
+                break;
+
+            case ACTIVITIES_ID:
+                sqLiteQueryBuilder.setTables(ActivitiesContract.TABLE_NAME);
+                long activitiesId = ActivitiesContract.getActivityId(uri);
+                sqLiteQueryBuilder.appendWhere(ActivitiesContract.Columns._ID + " = " + activitiesId);
+                break;
+
+        /*  case TIMINGS:
+                sqLiteQueryBuilder.setTables(TimingsContract.TABLE_NAME);
+                break;
+
+            case TIMINGS_ID:
+                sqLiteQueryBuilder.setTables(TimingsContract.TABLE_NAME);
+                long timingId = ActivitiesContract.getTimingId(uri);
+                sqLiteQueryBuilder.appendWhere(ActivitiesContract.Columns._ID + " = " + timingId);
+                break;
+
+            case ACTIVITIES_DURATIONS:
+                sqLiteQueryBuilder.setTables(DurationsContract.TABLE_NAME);
+                break;
+
+            case ACTIVITIES_DURATIONS_ID:
+                sqLiteQueryBuilder.setTables(DurationsContract.TABLE_NAME);
+                long activitiesDurationIdgId = ActivitiesContract.activitiesDurationId(uri);
+                sqLiteQueryBuilder.appendWhere(ActivitiesContract.Columns._ID + " = " + activitiesDurationId);
+                break; */
+
+            default:
+                throw new IllegalArgumentException("URI desconhecida: " + uri);
+        }
         return null;
     }
 
     @Nullable
     @Override
     public Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
-        return null;
+        Log.d(TAG, "insert: Entrando com 'insert' e chamado com uri: " + uri);
+        // Processar a URI recebida
+        final int match = sUriMatcher.match(uri);
+        Log.d(TAG, "insert: 'match' é " + match);
+
+        final SQLiteDatabase db;
+
+        Uri returnUri;
+        long recordId;
+
+        switch (match) {
+            case ACTIVITIES:
+                db = mOpenHelper.getWritableDatabase();
+                recordId = db.insert(ActivitiesContract.TABLE_NAME, null, values);
+                if (recordId >=0) {
+                    returnUri = ActivitiesContract.BuildActivityUri(recordId);
+                }else {
+                    throw new android.database.SQLException("Falha ao inserir dados " + uri.toString());
+                }
+                break;
+            case TIMINGS:
+            /*    db = mOpenHelper.getWritableDatabase();
+                recordId = db.insert(TimingsContract.Timings.buildTimingUri(recordId));
+                if (recordId >=0) {
+                    returnUri = TimingsContract.Timings.buildTimingUri(recordId);
+                }else {
+                    throw new android.database.SQLException("Falha ao inserir dados " + uri.toString());
+                break;*/
+
+            default:
+                throw new IllegalArgumentException("Unknown uri: " + uri);
+        }
+        Log.d(TAG, "insert: Saindo do 'insert', retornando " + returnUri);
+        return returnUri;
     }
 
     @Override
