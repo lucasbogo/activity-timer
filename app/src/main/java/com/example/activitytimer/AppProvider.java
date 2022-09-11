@@ -39,14 +39,14 @@ public class AppProvider extends ContentProvider {
     private static final int ACTIVITIES = 100;
     private static final int ACTIVITIES_ID = 101;
 
-    private static final int TIMINGS = 200;
-    private static final int TIMINGS_ID = 201;
+   /* private static final int TIMINGS = 200;
+    private static final int TIMINGS_ID = 201;*/
 
     //private static final int ACTIVITIES_TIMINGS = 300;
     //private static final int ACTIVITIES_TIMINGS_ID = 301;
 
-    private static final int ACTIVITIES_DURATIONS = 400;
-    private static final int ACTIVITIES_DURATIONS_ID = 401;
+/*    private static final int ACTIVITIES_DURATIONS = 400;
+    private static final int ACTIVITIES_DURATIONS_ID = 401;*/
     // Final constantes
 
     private static UriMatcher buildUriMatcher() {
@@ -193,8 +193,8 @@ public class AppProvider extends ContentProvider {
                     throw new android.database.SQLException("Falha ao inserir dados " + uri.toString());
                 }
                 break;
-            case TIMINGS:
-            /*    db = mOpenHelper.getWritableDatabase();
+           /*  case TIMINGS:
+               db = mOpenHelper.getWritableDatabase();
                 recordId = db.insert(TimingsContract.Timings.buildTimingUri(recordId));
                 if (recordId >=0) {
                     returnUri = TimingsContract.Timings.buildTimingUri(recordId);

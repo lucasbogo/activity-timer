@@ -3,8 +3,6 @@ package com.example.activitytimer;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
 import android.os.Bundle;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -42,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         String[] projection = { ActivitiesContract.Columns._ID,
                                 ActivitiesContract.Columns.ACTIVITIES_NAME,
                                 ActivitiesContract.Columns.ACTIVITIES_DESCRIPTION,
-                                ActivitiesContract.Columns.ACTIVITIES_SORT_ORDER };
+                                ActivitiesContract.Columns.ACTIVITIES_SORT_ORDER  };
 
 
         ContentResolver contentResolver = getContentResolver();
@@ -98,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.menumain_settings) {
             return true;
         }
 
