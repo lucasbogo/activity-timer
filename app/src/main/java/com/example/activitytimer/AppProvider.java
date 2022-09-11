@@ -211,11 +211,105 @@ public class AppProvider extends ContentProvider {
 
     @Override
     public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
-        return 0;
+        Log.d(TAG, "update: chamado com uri " + uri);
+        final int match = sUriMatcher.match(uri);
+        Log.d(TAG, "Combinação é " + match);
+
+        final SQLiteDatabase db;
+        int count;
+
+        String selectionCriteria;
+
+        switch(match) {
+            case ACTIVITIES:
+                db = mOpenHelper.getWritableDatabase();
+                count = db.delete(ActivitiesContract.TABLE_NAME, selection, selectionArgs);
+                break;
+
+            case ACTIVITIES_ID:
+                db = mOpenHelper.getWritableDatabase();
+                long activityId = ActivitiesContract.getActivityId(uri);
+                selectionCriteria = ActivitiesContract.Columns._ID + " = " + activityId;
+
+                if ((selection != null) && (selection.length()>0)) {
+                    selectionCriteria += " E (" + selection + ")";
+                }
+                count = db.delete(ActivitiesContract.TABLE_NAME, selectionCriteria, selectionArgs);
+                break;
+
+            /*case TIMINGS:
+                db = mOpenHelper.getWritableDatabase();
+                count = db.delete(TimingsContract.TABLE_NAME, selection, selectionArgs);
+                break;
+
+            case TIMINGS_ID:
+                db = mOpenHelper.getWritableDatabase();
+                long timingsId = TimingsContract.getTimingsId(uri);
+                selectionCriteria = TimingsContract.Columns._ID + " = " + timingsId;
+
+                if ((selection != null) && (selection.length()>0)) {
+                    selectionCriteria += " E (" + selection + ")";
+                }
+                count = db.delete(ActivitiesContract.TABLE_NAME, selectionCriteria, selectionArgs);
+                break; */
+
+            default:
+                throw new IllegalArgumentException("uri desconhecida " + uri);
+        }
+        // Mostrar o número de registros atualizados
+        Log.d(TAG, "Saindo do 'update' e retornando " + count);
+        return count;
     }
 
     @Override
     public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection, @Nullable String[] selectionArgs) {
-        return 0;
+        Log.d(TAG, "update: chamado com uri " + uri);
+        final int match = sUriMatcher.match(uri);
+        Log.d(TAG, "Combinação é " + match);
+
+        final SQLiteDatabase db;
+        int count;
+
+        String selectionCriteria;
+
+        switch(match) {
+            case ACTIVITIES:
+                db = mOpenHelper.getWritableDatabase();
+                count = db.update(ActivitiesContract.TABLE_NAME, values, selection, selectionArgs);
+                break;
+
+            case ACTIVITIES_ID:
+                db = mOpenHelper.getWritableDatabase();
+                long activityId = ActivitiesContract.getActivityId(uri);
+                selectionCriteria = ActivitiesContract.Columns._ID + " = " + activityId;
+
+                if ((selection != null) && (selection.length()>0)) {
+                    selectionCriteria += " E (" + selection + ")";
+                }
+                count = db.update(ActivitiesContract.TABLE_NAME, values, selectionCriteria, selectionArgs);
+                break;
+
+            /*case TIMINGS:
+                db = mOpenHelper.getWritableDatabase();
+                count = db.update(TimingsContract.TABLE_NAME, values, selection, selectionArgs);
+                break;
+
+            case TIMINGS_ID:
+                db = mOpenHelper.getWritableDatabase();
+                long timingsId = TimingsContract.getTimingsId(uri);
+                selectionCriteria = TimingsContract.Columns._ID + " = " + timingsId;
+
+                if ((selection != null) && (selection.length()>0)) {
+                    selectionCriteria += " E (" + selection + ")";
+                }
+                count = db.update(ActivitiesContract.TABLE_NAME, values, selectionCriteria, selectionArgs);
+                break; */
+
+            default:
+                throw new IllegalArgumentException("uri desconhecida " + uri);
+        }
+        // Mostrar o número de registros atualizados
+        Log.d(TAG, "Saindo do 'update' e retornando " + count);
+        return count;
     }
 }
