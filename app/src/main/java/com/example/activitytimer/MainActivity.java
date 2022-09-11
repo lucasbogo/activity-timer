@@ -1,5 +1,7 @@
 package com.example.activitytimer;
 
+import android.content.ContentResolver;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
@@ -7,6 +9,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.View;
 
 import androidx.navigation.NavController;
@@ -20,6 +23,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "MainActivity";
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
@@ -33,8 +37,21 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(binding.toolbar);
 
-        AppDatabase appDatabase = AppDatabase.getInstance(this);
-        final SQLiteDatabase db = appDatabase.getReadableDatabase();
+        String[] projection = { ActivitiesContract.Columns.ACTIVITIES_NAME, ActivitiesContract.Columns.ACTIVITIES_DESCRIPTION};
+        ContentResolver contentResolver = getContentResolver();
+        Cursor cursor = contentResolver.query(ActivitiesContract.CONTENT_URI, projection,null,null, ActivitiesContract.Columns.ACTIVITIES_NAME);
+
+        // Se o cursor não for igual a nulo:
+        if (cursor != null) {
+            Log.d(TAG, "onCreate: numeros de linhas:" + cursor.getCount());
+            // Enquanto:
+            while(cursor.moveToNext()){
+                for (int i=0; i<cursor.getColumnCount(); i++) {
+                    Log.d(TAG, "onCreate: " + cursor.getColumnName(i) + ": " + cursor.getString(i));
+                }
+                Log.d(TAG, "onCreate: teste===teste===teste===teste");
+            }
+        }
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
