@@ -1,48 +1,28 @@
 package com.example.activitytimer;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.activitytimer.databinding.FragmentAddEditBinding;
-import com.example.activitytimer.databinding.FragmentFirstBinding;
 
+/**
+ *  placeholder fragment que contém uma view simples
+ */
 public class AddEditActivityFragment extends Fragment {
+    private static final String TAG = "AddEditActivityFragment";
 
-    private FragmentAddEditBinding binding;
-
-    @Override
-    public View onCreateView(
-            LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState
-    ) {
-
-        binding = FragmentAddEditBinding .inflate(inflater, container, false);
-        return binding.getRoot();
-
-    }
-
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        binding.buttonFirst.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(AddEditActivityFragment.this)
-                        .navigate(R.id.action_AddEditActivityFragment_to_SecondFragment);
-            }
-        });
+    public AddEditActivityFragment() {
+        Log.d(TAG, "AddEditActivityFragment: constructor called");
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        Log.d(TAG, "onCreateView: starts");
+        return inflater.inflate(R.layout.fragment_add_edit, container, false);
     }
-
 }
