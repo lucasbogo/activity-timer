@@ -17,6 +17,7 @@
             android:name=".AddEditActivity"
             android:exported="false"
             android:label="@string/title_activity_add_edit"
+            android:parentActivityName=".MainActivity"
             android:theme="@style/Theme.ActivityTimer.NoActionBar" />
         <activity
             android:name=".MainActivity"

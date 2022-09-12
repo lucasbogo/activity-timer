@@ -9,11 +9,12 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.example.activitytimer.databinding.FragmentAddEditBinding;
 import com.example.activitytimer.databinding.FragmentFirstBinding;
 
-public class FirstFragment extends Fragment {
+public class AddEditActivityFragment extends Fragment {
 
-    private FragmentFirstBinding binding;
+    private FragmentAddEditBinding binding;
 
     @Override
     public View onCreateView(
@@ -21,7 +22,7 @@ public class FirstFragment extends Fragment {
             Bundle savedInstanceState
     ) {
 
-        binding = FragmentFirstBinding.inflate(inflater, container, false);
+        binding = FragmentAddEditBinding .inflate(inflater, container, false);
         return binding.getRoot();
 
     }
@@ -32,8 +33,8 @@ public class FirstFragment extends Fragment {
         binding.buttonFirst.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(FirstFragment.this)
-                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
+                NavHostFragment.findNavController(AddEditActivityFragment.this)
+                        .navigate(R.id.action_AddEditActivityFragment_to_SecondFragment);
             }
         });
     }
