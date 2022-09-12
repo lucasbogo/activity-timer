@@ -1,48 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/content_add_edit"
+    android:id="@+id/fragment"
+    android:name="com.example.activitytimer.AddEditActivityFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".AddEditActivityFragment"
-    tools:showIn="@layout/activity_add_edit">
-
-    <EditText
-        android:id="@+id/addedit_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/add_edit_name_hint"
-        android:inputType="textNoSuggestions"
-        android:maxLength="100" />
-
-    <EditText
-        android:id="@+id/add_edit_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/add_edit_description_hint"
-        android:inputType="textMultiLine"
-        android:maxLength="256"
-        tools:ignore="TouchTargetSizeCheck" />
-
-    <EditText
-        android:id="@+id/add_edit_sort_order"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/add_edit_sort_hint"
-        android:inputType="number"
-        android:maxLength="9"
-        tools:ignore="TouchTargetSizeCheck" />
-
-    <Button
-        android:id="@+id/add_edit_save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:drawableStart="@android:drawable/ic_menu_save"
-        android:drawableLeft="@android:drawable/ic_menu_save"
-        android:text="@string/add_edit_save_text" />
-</LinearLayout>
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:layout="@layout/fragment_add_edit"/>

@@ -1,55 +1,33 @@
 package com.example.activitytimer;
 
-import android.content.ContentResolver;
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.net.Uri;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
 
+    // Verificar se a 'activity' está no modo '2-pane'
+    // i.e. running in landscape on a tablet
+    private boolean mTwoPane = false;
+
+    private static final String ADD_EDIT_FRAGMENT = "AddEditFragment";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-        String[] projection = {ActivitiesContract.Columns._ID,
-                ActivitiesContract.Columns.ACTIVITIES_NAME,
-                ActivitiesContract.Columns.ACTIVITIES_DESCRIPTION,
-                ActivitiesContract.Columns.ACTIVITIES_SORT_ORDER};
-
-
-        ContentResolver contentResolver = getContentResolver();
-
-        // Inserindo dados para teste via ContentValues
-        ContentValues values = new ContentValues();
-
-        values.put(ActivitiesContract.Columns.ACTIVITIES_NAME, "Atividade 1");
-        values.put(ActivitiesContract.Columns.ACTIVITIES_DESCRIPTION, "Descrição 1");
-        values.put(ActivitiesContract.Columns.ACTIVITIES_SORT_ORDER, 1);
-        Uri uri = contentResolver.insert(ActivitiesContract.CONTENT_URI, values);
-
-        Cursor cursor = contentResolver.query(ActivitiesContract.CONTENT_URI,
-                projection, null, null, ActivitiesContract.Columns.ACTIVITIES_NAME);
-
-        // Se o cursor não for igual a nulo:
-        if (cursor != null) {
-            Log.d(TAG, "onCreate: numeros de linhas:" + cursor.getCount());
-            // Enquanto:
-            while (cursor.moveToNext()) {
-                for (int i = 0; i < cursor.getColumnCount(); i++) {
-                    Log.d(TAG, "onCreate: " + cursor.getColumnName(i) + ": " + cursor.getString(i));
-                }
-                Log.d(TAG, "onCreate: teste");
-            }
-            cursor.close();
-        }
 
     }
 
@@ -68,10 +46,37 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.menumain_settings) {
-            return true;
+        switch (id) {
+            case R.id.menumain_addActivity:
+                taskEditRequest(null);
+                break;
+            case R.id.menumain_showDurations:
+                break;
+            case R.id.menumain_settings:
+                break;
+            case R.id.menumain_showAbout:
+                break;
+            case R.id.menumain_generate:
+                break;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void taskEditRequest(Activity activity) {
+        Log.d(TAG, "taskEditRequest: starts");
+        if (mTwoPane) {
+            Log.d(TAG, "taskEditRequest: in two-pane mode (tablet)");
+        } else {
+            Log.d(TAG, "taskEditRequest: in single-pane mode (phone)");
+            // in single-pane mode, start the detail activity for the selected item Id.
+            Intent detailIntent = new Intent(this, AddEditActivity.class);
+            if (activity != null) { // editing a task
+                detailIntent.putExtra(Activity.class.getSimpleName(), activity);
+                startActivity(detailIntent);
+            } else { // adding a new task
+                startActivity(detailIntent);
+            }
+        }
     }
 }
