@@ -24,4 +24,5 @@
     <string name="add_edit_description_hint">Descrição Atividade: opcional</string>
     <string name="add_edit_sort_hint">Ordem: crescente</string>
     <string name="add_edit_save_text">Salvar</string>
+    <string name="title_activity_add_edit">AddEditActivity</string>
 </resources>

@@ -36,4 +36,14 @@ class Activity implements Serializable {
     public void setId(long id) {
         this.m_Id = id;
     }
+
+    @Override
+    public String toString() {
+        return "Activity{" +
+                "m_Id=" + m_Id +
+                ", mName='" + mName + '\'' +
+                ", mDescription='" + mDescription + '\'' +
+                ", mSortOrder=" + mSortOrder +
+                '}';
+    }
 }
