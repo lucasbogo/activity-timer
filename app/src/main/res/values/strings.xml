@@ -18,4 +18,6 @@
     <string name="menumain_showAbout">Autor</string>
     <string name="menumain_generate">Gerar Dados</string>
     <string name="no_activity_message">Nenhuma Atividade Selecionada</string>
+    <string name="edit_button_description">Botão para Editar Detalhes da Descrição</string>
+    <string name="delete_button_description">Botão para Deletar Detalhes Descrição</string>
 </resources>
