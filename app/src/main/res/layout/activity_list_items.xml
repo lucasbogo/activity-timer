@@ -3,41 +3,54 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/ali_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:textSize="22sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="21dp"
-        tools:layout_editor_absoluteY="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/ali_description"
+        app:layout_constraintEnd_toStartOf="@+id/ali_edit"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="ActivitytimerApp" />
 
     <TextView
         android:id="@+id/ali_description"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="21dp"
-        tools:layout_editor_absoluteY="61dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/ali_edit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ali_name"
         tools:text="Descrição" />
 
     <ImageButton
         android:id="@+id/ali_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:contentDescription="@string/edit_button_description"
-        app:srcCompat="@android:drawable/ic_menu_edit"
-        tools:layout_editor_absoluteX="24dp"
-        tools:layout_editor_absoluteY="110dp" />
+        app:layout_constraintEnd_toStartOf="@+id/ali_delete"
+        app:layout_constraintTop_toTopOf="@+id/ali_delete"
+        app:srcCompat="@android:drawable/ic_menu_edit" />
 
     <ImageButton
         android:id="@+id/ali_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:contentDescription="@string/delete_button_description"
-        app:srcCompat="@android:drawable/ic_menu_delete"
-        tools:layout_editor_absoluteX="83dp"
-        tools:layout_editor_absoluteY="110dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_delete" />
 </androidx.constraintlayout.widget.ConstraintLayout>
