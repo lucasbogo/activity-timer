@@ -1,6 +1,5 @@
 package com.example.activitytimer;
 
-import android.app.LoaderManager;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -9,7 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.loader.app.LoaderManager;
 import androidx.loader.content.CursorLoader;
 
 import java.security.InvalidParameterException;
@@ -22,6 +24,13 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
 
     public MainActivityFragment() {
         Log.d(TAG, "MainActivityFragment: começa");
+    }
+    
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        Log.d(TAG, "onViewCreated: começa");
+        super.onViewCreated(view, savedInstanceState);
+        LoaderManager.getInstance(this).initLoader(LOADER_ID, null, this);
     }
 
     @Override
@@ -50,13 +59,22 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
             throw new InvalidParameterException(TAG + ".onCreateLoader chamado com invalid loader id" + id);
     }
 
-    @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
 
+        @Override
+        public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+            Log.d(TAG, "Entrando com onLoadFinished");
+            mAdapter.swapCursor(data);
+            int count = mAdapter.getItemCount();
+
+            Log.d(TAG, "onLoadFinished: contagem é: " + count);
+
+        }
+
+        @Override
+        public void onLoaderReset(Loader<Cursor> loader) {
+            Log.d(TAG, "onLoaderReset: começa");
+            mAdapter.swapCursor(null);
+        }
     }
 
-    @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
 
-    }
-}
