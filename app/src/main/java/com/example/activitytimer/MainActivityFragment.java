@@ -1,6 +1,5 @@
 package com.example.activitytimer;
 
-import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.CursorLoader;
+import androidx.loader.content.Loader;
 
 import java.security.InvalidParameterException;
 
@@ -40,7 +40,7 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
     }
 
     @Override
-    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+    public androidx.loader.content.Loader<Cursor> onCreateLoader(int id, Bundle args) {
         Log.d(TAG, "onCreateLoader: começa com id " + id);
         String[] projection = {ActivitiesContract.Columns._ID, ActivitiesContract.Columns.ACTIVITIES_NAME,
                 ActivitiesContract.Columns.ACTIVITIES_DESCRIPTION, ActivitiesContract.Columns.ACTIVITIES_SORT_ORDER};
