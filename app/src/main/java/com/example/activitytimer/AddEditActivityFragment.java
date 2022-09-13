@@ -35,6 +35,7 @@ public class AddEditActivityFragment extends Fragment {
         Log.d(TAG, "onCreateView: starts");
         View view = inflater.inflate(R.layout.fragment_add_edit, container, false);
 
+        // Não é boa prática, mas resolve por enquanto: adicionar texto e salvar... I Need More Time!
         mNameTextView = (EditText) view.findViewById(R.id.add_edit_name);
         mNameDescriptionTextView = (EditText) view.findViewById(R.id.add_edit_description);
         mNameSortOrderTextView = (EditText) view.findViewById(R.id.add_edit_sort_order);
