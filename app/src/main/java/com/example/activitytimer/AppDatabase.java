@@ -58,7 +58,7 @@ class AppDatabase extends SQLiteOpenHelper {
     // Construtor Default; Passei o cursor como null pois este projeto não será muito avançado
     private AppDatabase(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        Log.d(TAG, "AppDatabase: constructor");
+        Log.d(TAG, "AppDatabase: construtor bd");
     }
 
     /**

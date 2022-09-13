@@ -47,7 +47,7 @@ public class ActivitiesContract {
     static final String CONTENT_TYPE_= "vnd.android.cursor.dir/vnd." + CONTENT_AUTHORITY + "." + TABLE_NAME;
     static final String CONTENT_ITEM_TYPE_= "vnd.android.cursor.dir/vnd." + CONTENT_AUTHORITY + "." + TABLE_NAME;
 
-    static Uri BuildActivityUri(long activitiesId) {
+    static Uri buildActivityUri(long activitiesId) {
         return ContentUris.withAppendedId(CONTENT_URI, activitiesId);
     }
 

@@ -10,11 +10,11 @@ class Activity implements Serializable {
     private final String mDescription;
     private final int mSortOrder;
 
-    public Activity(long id, String name, String description, int sortOrder) {
+    public Activity(long id, String name, String description, int sort_order) {
         this.m_Id = id;
         this.mName = name;
         this.mDescription = description;
-        this.mSortOrder = sortOrder;
+        this.mSortOrder = sort_order;
     }
 
     public long getId() {

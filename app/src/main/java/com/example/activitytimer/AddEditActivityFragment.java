@@ -62,7 +62,7 @@ public class AddEditActivityFragment extends Fragment {
             }
         } else {
             activity = null;
-            Log.d(TAG, "onCreateView: No arguments, adding new record");
+            Log.d(TAG, "onCreateView: Sem argumentos, adicionando novo registro");
             mMode = FragmentEditMode.ADD;
         }
 
@@ -94,7 +94,7 @@ public class AddEditActivityFragment extends Fragment {
                         }
                         if(values.size() != 0) {
                             Log.d(TAG, "onClick: updating task");
-                            contentResolver.update(ActivitiesContract.BuildActivityUri(activity.getId()), values, null, null);
+                            contentResolver.update(ActivitiesContract.buildActivityUri(activity.getId()), values, null, null);
                         }
                         break;
                     case ADD:

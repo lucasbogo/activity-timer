@@ -188,7 +188,7 @@ public class AppProvider extends ContentProvider {
                 db = mOpenHelper.getWritableDatabase();
                 recordId = db.insert(ActivitiesContract.TABLE_NAME, null, values);
                 if (recordId >=0) {
-                    returnUri = ActivitiesContract.BuildActivityUri(recordId);
+                    returnUri = ActivitiesContract.buildActivityUri(recordId);
                 }else {
                     throw new android.database.SQLException("Falha ao inserir dados " + uri.toString());
                 }
