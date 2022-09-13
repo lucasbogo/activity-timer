@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         switch (id) {
             case R.id.menumain_addActivity:
-                taskEditRequest(null);
+                activityEditRequest(null);
                 break;
             case R.id.menumain_showDurations:
                 break;
@@ -63,18 +63,18 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void taskEditRequest(Activity activity) {
-        Log.d(TAG, "taskEditRequest: starts");
+    private void activityEditRequest(Activity activity) {
+        Log.d(TAG, "activityEditRequest: starts");
         if (mTwoPane) {
-            Log.d(TAG, "taskEditRequest: in two-pane mode (tablet)");
+            Log.d(TAG, "activityEditRequest: in two-pane mode (tablet)");
         } else {
-            Log.d(TAG, "taskEditRequest: in single-pane mode (phone)");
-            // in single-pane mode, start the detail activity for the selected item Id.
+            Log.d(TAG, "activityEditRequest: in single-pane mode (phone)");
+            //no modo 'single-pane', começa o detalhamento para o item Id selecionado
             Intent detailIntent = new Intent(this, AddEditActivity.class);
-            if (activity != null) { // editing a task
+            if (activity != null) { // editar a atividade
                 detailIntent.putExtra(Activity.class.getSimpleName(), activity);
                 startActivity(detailIntent);
-            } else { // adding a new task
+            } else { // adicionar uma nota atividade
                 startActivity(detailIntent);
             }
         }
