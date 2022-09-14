@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements CursorReciclerVie
 
     @Override
     public void onDeleteClick(Activity activity) {
-
+        getContentResolver().delete(ActivitiesContract.buildActivityUri(activity.getId()), null, null);
     }
 
     private void activityEditRequest(Activity activity) {

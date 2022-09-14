@@ -24,7 +24,6 @@ class CursorReciclerViewAdapter extends RecyclerView.Adapter<CursorReciclerViewA
     }
 
     public CursorReciclerViewAdapter(Cursor cursor, OnActivityClickListener listener) {
-        Log.d(TAG, "CursorReciclerViewAdapter: construtor chamado");
         this.mCursor = cursor;
         this.mListener = listener;
     }
@@ -32,17 +31,14 @@ class CursorReciclerViewAdapter extends RecyclerView.Adapter<CursorReciclerViewA
     @NonNull
     @Override
     public ActivityViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Log.d(TAG, "onCreateViewHolder: nova view requisitada");
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_list_items, parent, false);
         return new ActivityViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ActivityViewHolder holder, int position) {
-        Log.d(TAG, "onBindViewHolder: começa");
 
         if ((mCursor == null) || (mCursor.getCount() == 0)) {
-            Log.d(TAG, "onBindViewHolder: fornecendo instruções");
             holder.name.setText(R.string.instructions_heading);
             holder.description.setText(R.string.instructions);
             holder.editButton.setVisibility(View.GONE);
@@ -92,7 +88,6 @@ class CursorReciclerViewAdapter extends RecyclerView.Adapter<CursorReciclerViewA
 
     @Override
     public int getItemCount() {
-        Log.d(TAG, "getItemCount: começa");
         if ((mCursor == null) || (mCursor.getCount() == 0)) {
             return 1; // fib, pq populamos um unica ViewHolder com as instruções;
         } else {
