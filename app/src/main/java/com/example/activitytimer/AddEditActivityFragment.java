@@ -29,6 +29,10 @@ public class AddEditActivityFragment extends Fragment {
     private Button mSaveButton;
     private OnSaveClicked mSaveListener = null;
 
+    interface OnSaveClicked {
+    void onSaveClicked();
+}
+
     public AddEditActivityFragment() {
         Log.d(TAG, "AddEditActivityFragment: constructor called");
     }

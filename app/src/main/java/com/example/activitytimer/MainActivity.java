@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity implements CursorReciclerVie
     private static final String TAG = "MainActivity";
 
 
-    private final boolean mTwoPane = false;
+    private boolean mTwoPane = false;
 
     private static final String ADD_EDIT_FRAGMENT = "AddEditFragment";
 
@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements CursorReciclerVie
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        if (findViewById(R.id.task_details_container) != null) {
+        if (findViewById(R.id.activity_detail_container) != null) {
             // The detail container view will be present only in the large-screen layouts (res/values-land and res/values-sw600dp).
             // If this view is present, then the activity should be in two-pane mode.
             mTwoPane = true;
