@@ -42,9 +42,8 @@ public class MainActivity extends AppCompatActivity implements CursorReciclerVie
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment fragment = fragmentManager.findFragmentById(R.id.activity_detail_container);
         if (fragment != null) {
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.remove(fragment);
-            fragmentTransaction.commit();
+            getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+
         }
     }
 
