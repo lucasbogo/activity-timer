@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements CursorReciclerViewAdapter.OnActivityClickListener {
     private static final String TAG = "MainActivity";
 
 
@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
 
     }
 
@@ -78,5 +77,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(detailIntent);
             }
         }
+    }
+
+    @Override
+    public void onEditClick(Activity activity) {
+
+    }
+
+    @Override
+    public void onDeleteClick(Activity activity) {
+
     }
 }
