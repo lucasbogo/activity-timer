@@ -27,7 +27,7 @@ public class AddEditActivityFragment extends Fragment {
     private EditText mNameDescriptionTextView;
     private EditText mNameSortOrderTextView;
     private Button mSaveButton;
-   // private OnSaveClicked mSaveListener = null;
+    private OnSaveClicked mSaveListener = null;
 
     public AddEditActivityFragment() {
         Log.d(TAG, "AddEditActivityFragment: constructor called");
@@ -44,7 +44,7 @@ public class AddEditActivityFragment extends Fragment {
         mNameSortOrderTextView = (EditText) view.findViewById(R.id.add_edit_sort_order);
         mSaveButton = (Button) view.findViewById(R.id.add_edit_save);
 
-        Bundle arguments = getActivity().getIntent().getExtras(); // Mudarei isso depois
+        Bundle arguments = getArguments();
 
         final Activity activity;
         if (arguments != null) {

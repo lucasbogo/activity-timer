@@ -82,6 +82,11 @@ public class MainActivity extends AppCompatActivity implements CursorReciclerVie
 
         if (mTwoPane) {
             AddEditActivityFragment fragment = new AddEditActivityFragment();
+
+            Bundle arguments = new Bundle();
+            arguments.putSerializable(Activity.class.getSimpleName(), activity);
+            fragment.setArguments(arguments);
+
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.add(R.id.activity_detail_container, fragment);
