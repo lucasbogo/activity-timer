@@ -98,10 +98,7 @@ public class MainActivity extends AppCompatActivity implements CursorReciclerVie
             arguments.putSerializable(Activity.class.getSimpleName(), activity);
             fragment.setArguments(arguments);
 
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.activity_detail_container, fragment);
-            fragmentTransaction.commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.activity_detail_container, fragment).commit();
 
         } else {
             Intent detailIntent = new Intent(this, AddEditActivity.class);
