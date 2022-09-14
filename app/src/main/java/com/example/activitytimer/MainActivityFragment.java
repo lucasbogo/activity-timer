@@ -20,10 +20,8 @@ import java.security.InvalidParameterException;
 
 
 public class MainActivityFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
-    private static final String TAG = "MainActivityFragment";
-
     public static final int LOADER_ID = 0;
-
+    private static final String TAG = "MainActivityFragment";
     private CursorReciclerViewAdapter mAdapter; // Adiciona a referencia do 'adapter'
 
 

@@ -24,7 +24,7 @@ public class AddEditActivityFragment extends Fragment {
 
     private EditText mNameTextView;
     private EditText mNameDescriptionTextView;
-    private EditText mNameSortOrderTextView;
+   /* private EditText mNameSortOrderTextView;*/
     private Button mSaveButton;
 
     public AddEditActivityFragment() {
@@ -40,7 +40,7 @@ public class AddEditActivityFragment extends Fragment {
         // Não é boa prática, mas resolve por enquanto: adicionar texto e salvar... I Need More Time!
         mNameTextView = (EditText) view.findViewById(R.id.add_edit_name);
         mNameDescriptionTextView = (EditText) view.findViewById(R.id.add_edit_description);
-        mNameSortOrderTextView = (EditText) view.findViewById(R.id.add_edit_sort_order);
+        /*mNameSortOrderTextView = (EditText) view.findViewById(R.id.add_edit_sort_order);*/
         mSaveButton = (Button) view.findViewById(R.id.add_edit_save);
 
         Bundle arguments = getActivity().getIntent().getExtras(); // Mudarei isso depois
@@ -54,7 +54,7 @@ public class AddEditActivityFragment extends Fragment {
                 Log.d(TAG, "onCreateView: Detalhes da atividade achado, editando... ");
                 mNameTextView.setText(activity.getName());
                 mNameDescriptionTextView.setText(activity.getDescription());
-                mNameSortOrderTextView.setText(Integer.toString(activity.getSortOrder()));
+               /* mNameSortOrderTextView.setText(Integer.toString(activity.getSortOrder()));*/
                 mMode = FragmentEditMode.EDIT;
             } else {
                 // No task, so we must be adding a new task, and not editing an  existing one
@@ -71,12 +71,12 @@ public class AddEditActivityFragment extends Fragment {
             public void onClick(View view) {
                 // Update the database if at least one field has changed.
                 // - There's no need to hit the database unless this has happened.
-                int so;     // to save repeated conversions to int.
+                /*int so;     // to save repeated conversions to int.
                 if(mNameSortOrderTextView.length()>0) {
                     so = Integer.parseInt(mNameSortOrderTextView.getText().toString());
                 } else {
                     so = 0;
-                }
+                }*/
 
                 ContentResolver contentResolver = getActivity().getContentResolver();
                 ContentValues values = new ContentValues();
@@ -89,9 +89,9 @@ public class AddEditActivityFragment extends Fragment {
                         if(!mNameDescriptionTextView.getText().toString().equals(activity.getDescription())) {
                             values.put(ActivitiesContract.Columns.ACTIVITIES_DESCRIPTION, mNameDescriptionTextView.getText().toString());
                         }
-                        if(so != activity.getSortOrder()) {
+                        /*if(so != activity.getSortOrder()) {
                             values.put(ActivitiesContract.Columns.ACTIVITIES_SORT_ORDER, so);
-                        }
+                        }*/
                         if(values.size() != 0) {
                             Log.d(TAG, "onClick: updating task");
                             contentResolver.update(ActivitiesContract.buildActivityUri(activity.getId()), values, null, null);
@@ -102,15 +102,15 @@ public class AddEditActivityFragment extends Fragment {
                             Log.d(TAG, "onClick: adding new task");
                             values.put(ActivitiesContract.Columns.ACTIVITIES_NAME, mNameTextView.getText().toString());
                             values.put(ActivitiesContract.Columns.ACTIVITIES_DESCRIPTION, mNameDescriptionTextView.getText().toString());
-                            values.put(ActivitiesContract.Columns.ACTIVITIES_SORT_ORDER, so);
+                            /*values.put(ActivitiesContract.Columns.ACTIVITIES_SORT_ORDER, so);*/
                             contentResolver.insert(ActivitiesContract.CONTENT_URI, values);
                         }
                         break;
                 }
-                Log.d(TAG, "onClick: Done editing");
+                Log.d(TAG, "onClick: Edição pronta");
             }
         });
-        Log.d(TAG, "onCreateView: Exiting...");
+        Log.d(TAG, "onCreateView: Saindo...");
 
         return view;
     }

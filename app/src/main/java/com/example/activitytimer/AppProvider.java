@@ -117,11 +117,7 @@ public class AppProvider extends ContentProvider {
         }
 
         SQLiteDatabase db = mOpenHelper.getReadableDatabase();
-        // Passei os parâmetros do 'query method' acima
-        // return sqLiteQueryBuilder.query(db, projection, selection, selectionArgs, null, null, sort_oder);
         Cursor cursor = sqLiteQueryBuilder.query(db, projection, selection, selectionArgs, null, null, sort_oder);
-        Log.d(TAG, "query: rows in returned cursor = " + cursor.getCount()); // TODO remove this line
-
         cursor.setNotificationUri(getContext().getContentResolver(), uri);
         return cursor;
 
@@ -192,7 +188,7 @@ public class AppProvider extends ContentProvider {
                 if (recordId >= 0) {
                     returnUri = ActivitiesContract.buildActivityUri(recordId);
                 } else {
-                    throw new android.database.SQLException("Falha ao inserir dados " + uri.toString());
+                    throw new android.database.SQLException("Falha ao inserir dados " + uri);
                 }
                 break;
            /*  case TIMINGS:

@@ -15,18 +15,18 @@ import androidx.recyclerview.widget.RecyclerView;
 class CursorReciclerViewAdapter extends RecyclerView.Adapter<CursorReciclerViewAdapter.ActivityViewHolder> {
     private static final String TAG = "CursorReciclerViewAdapt";
     private Cursor mCursor;
-    //private OnActivityClickListener mListener;
+    private OnActivityClickListener mListener;
 
-    /*interface OnTaskClickListener {
+    interface OnTaskClickListener {
         void onEditClick(Activity activity);
 
         void onDeleteClick(Activity activity);
-    }*/
+    }
 
     public CursorReciclerViewAdapter(Cursor cursor) {
         Log.d(TAG, "CursorReciclerViewAdapter: construtor chamado");
         this.mCursor = cursor;
-        // this.mListener = listener;
+        this.mListener = listener;
     }
 
     @NonNull
@@ -61,6 +61,30 @@ class CursorReciclerViewAdapter extends RecyclerView.Adapter<CursorReciclerViewA
             holder.description.setText(activity.getDescription());
             holder.editButton.setVisibility(View.VISIBLE);  // TODO add onClick listener
             holder.deleteButton.setVisibility(View.VISIBLE); // TODO add onClick listener
+            View.OnClickListener buttonListener = new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    switch (view.getId()) {
+                        case R.id.ali_edit:
+                            if (mListener != null) {
+                                mListener.onEditClick(activity);
+                            }
+                            break;
+                        case R.id.ali_delete:
+                            if (mListener != null) {
+                                mListener.onDeleteClick(activity);
+                            }
+                            break;
+                        default:
+                            Log.d(TAG, "onClick: found unexpected button id");
+                    }
+
+                }
+            };
+
+            holder.editButton.setOnClickListener(buttonListener);
+            holder.deleteButton.setOnClickListener(buttonListener);
         }
 
     }
@@ -109,7 +133,6 @@ class CursorReciclerViewAdapter extends RecyclerView.Adapter<CursorReciclerViewA
 
         public ActivityViewHolder(View itemView) {
             super(itemView);
-//            Log.d(TAG, "TaskViewHolder: começa");
 
             this.name = (TextView) itemView.findViewById(R.id.ali_name);
             this.description = (TextView) itemView.findViewById(R.id.ali_description);
