@@ -14,8 +14,6 @@ public class MainActivity extends AppCompatActivity implements CursorReciclerVie
     private static final String TAG = "MainActivity";
 
 
-    // Verificar se a 'activity' está no modo '2-pane'
-    // i.e. running in landscape on a tablet
     private final boolean mTwoPane = false;
 
     private static final String ADD_EDIT_FRAGMENT = "AddEditFragment";
