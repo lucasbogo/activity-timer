@@ -17,16 +17,16 @@ class CursorReciclerViewAdapter extends RecyclerView.Adapter<CursorReciclerViewA
     private Cursor mCursor;
     //private OnActivityClickListener mListener;
 
-    interface OnTaskClickListener {
+    /*interface OnTaskClickListener {
         void onEditClick(Activity activity);
 
         void onDeleteClick(Activity activity);
-    }
+    }*/
 
     public CursorReciclerViewAdapter(Cursor cursor) {
         Log.d(TAG, "CursorReciclerViewAdapter: construtor chamado");
         this.mCursor = cursor;
-       // this.mListener = listener;
+        // this.mListener = listener;
     }
 
     @NonNull
@@ -86,13 +86,13 @@ class CursorReciclerViewAdapter extends RecyclerView.Adapter<CursorReciclerViewA
      */
     Cursor swapCursor(Cursor newCursor) {
         if (newCursor == mCursor) {
-    }
+        }
         final Cursor oldCursor = mCursor;
         mCursor = newCursor;
         if (newCursor != null) {
             //
             notifyDataSetChanged();
-        } else{
+        } else {
             //
             notifyItemRangeRemoved(0, getItemCount());
         }

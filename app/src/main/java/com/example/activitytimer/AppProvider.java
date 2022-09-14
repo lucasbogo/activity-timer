@@ -7,21 +7,17 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
-import android.nfc.Tag;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.time.Duration;
-
 /**
  * Criado por Lucas Bogo em 09/09/2022
- *
+ * <p>
  * 'Provider' para o aplicativo ActivityTimer;
- *
+ * <p>
  * Essa é a única classe que conhece {@link AppDatabase}
- *
  */
 
 public class AppProvider extends ContentProvider {
@@ -67,6 +63,7 @@ public class AppProvider extends ContentProvider {
         return matcher;
 
     }
+
     @Override
     public boolean onCreate() {
         mOpenHelper = AppDatabase.getInstance(getContext());
@@ -75,7 +72,7 @@ public class AppProvider extends ContentProvider {
 
     @Nullable
     @Override
-    public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
+    public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sort_oder) {
         Log.d(TAG, "query: chamado com a URI " + uri);
         final int match = sUriMatcher.match(uri);
         Log.d(TAG, "query: match é " + match);
@@ -121,7 +118,12 @@ public class AppProvider extends ContentProvider {
 
         SQLiteDatabase db = mOpenHelper.getReadableDatabase();
         // Passei os parâmetros do 'query method' acima
-        return sqLiteQueryBuilder.query(db, projection, selection, selectionArgs, null, null, sortOrder);
+        // return sqLiteQueryBuilder.query(db, projection, selection, selectionArgs, null, null, sort_oder);
+        Cursor cursor = sqLiteQueryBuilder.query(db, projection, selection, selectionArgs, null, null, sort_oder);
+        Log.d(TAG, "query: rows in returned cursor = " + cursor.getCount()); // TODO remove this line
+
+        cursor.setNotificationUri(getContext().getContentResolver(), uri);
+        return cursor;
 
     }
 
@@ -187,9 +189,9 @@ public class AppProvider extends ContentProvider {
             case ACTIVITIES:
                 db = mOpenHelper.getWritableDatabase();
                 recordId = db.insert(ActivitiesContract.TABLE_NAME, null, values);
-                if (recordId >=0) {
+                if (recordId >= 0) {
                     returnUri = ActivitiesContract.buildActivityUri(recordId);
-                }else {
+                } else {
                     throw new android.database.SQLException("Falha ao inserir dados " + uri.toString());
                 }
                 break;
@@ -205,8 +207,18 @@ public class AppProvider extends ContentProvider {
             default:
                 throw new IllegalArgumentException("Unknown uri: " + uri);
         }
-        Log.d(TAG, "insert: Saindo do 'insert', retornando " + returnUri);
+
+        if (recordId >= 0) {
+            // something was inserted
+            Log.d(TAG, "insert: Setting notifyChanged with " + uri);
+            getContext().getContentResolver().notifyChange(uri, null);
+        } else {
+            Log.d(TAG, "insert: nothing inserted");
+        }
+
+        Log.d(TAG, "Exiting insert, returning " + returnUri);
         return returnUri;
+
     }
 
     @Override
@@ -220,7 +232,7 @@ public class AppProvider extends ContentProvider {
 
         String selectionCriteria;
 
-        switch(match) {
+        switch (match) {
             case ACTIVITIES:
                 db = mOpenHelper.getWritableDatabase();
                 count = db.delete(ActivitiesContract.TABLE_NAME, selection, selectionArgs);
@@ -231,7 +243,7 @@ public class AppProvider extends ContentProvider {
                 long activityId = ActivitiesContract.getActivityId(uri);
                 selectionCriteria = ActivitiesContract.Columns._ID + " = " + activityId;
 
-                if ((selection != null) && (selection.length()>0)) {
+                if ((selection != null) && (selection.length() > 0)) {
                     selectionCriteria += " E (" + selection + ")";
                 }
                 count = db.delete(ActivitiesContract.TABLE_NAME, selectionCriteria, selectionArgs);
@@ -256,8 +268,15 @@ public class AppProvider extends ContentProvider {
             default:
                 throw new IllegalArgumentException("uri desconhecida " + uri);
         }
-        // Mostrar o número de registros atualizados
-        Log.d(TAG, "Saindo do 'update' e retornando " + count);
+        if (count > 0) {
+            // something was deleted
+            Log.d(TAG, "delete: Setting notifyChange with " + uri);
+            getContext().getContentResolver().notifyChange(uri, null);
+        } else {
+            Log.d(TAG, "delete: nada deletedo");
+        }
+
+        Log.d(TAG, "Saindo do update, returnando " + count);
         return count;
     }
 
@@ -272,7 +291,7 @@ public class AppProvider extends ContentProvider {
 
         String selectionCriteria;
 
-        switch(match) {
+        switch (match) {
             case ACTIVITIES:
                 db = mOpenHelper.getWritableDatabase();
                 count = db.update(ActivitiesContract.TABLE_NAME, values, selection, selectionArgs);
@@ -283,7 +302,7 @@ public class AppProvider extends ContentProvider {
                 long activityId = ActivitiesContract.getActivityId(uri);
                 selectionCriteria = ActivitiesContract.Columns._ID + " = " + activityId;
 
-                if ((selection != null) && (selection.length()>0)) {
+                if ((selection != null) && (selection.length() > 0)) {
                     selectionCriteria += " E (" + selection + ")";
                 }
                 count = db.update(ActivitiesContract.TABLE_NAME, values, selectionCriteria, selectionArgs);
@@ -308,8 +327,16 @@ public class AppProvider extends ContentProvider {
             default:
                 throw new IllegalArgumentException("uri desconhecida " + uri);
         }
+
+        if (count > 0) {
+            // something was deleted
+            Log.d(TAG, "update: Setting notifyChange with " + uri);
+            getContext().getContentResolver().notifyChange(uri, null);
+        } else {
+            Log.d(TAG, "update: nada deletado");
+        }
         // Mostrar o número de registros atualizados
-        Log.d(TAG, "Saindo do 'update' e retornando " + count);
+        Log.d(TAG, "Saindo do update, returnando " + count);
         return count;
     }
 }
