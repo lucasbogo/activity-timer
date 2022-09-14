@@ -41,18 +41,12 @@ import android.util.Log;
 
 class AppDatabase extends SQLiteOpenHelper {
 
-    // Tag com nome 'default'
+
     private static final String TAG = "AppDatabase";
-
-    // Adicionar campos para guardar o nome BD na versão 'conta' do banco de dados
     public static final String DATABASE_NAME = "activitytimer.db";
-    // Versão DB
     public static final int DATABASE_VERSION = 1;
-
-    // Implementar Banco de Dados do aplicativo como 'Singleton'
     private static AppDatabase instance = null;
 
-    // Construtor Default; Passei o cursor como null pois este projeto não será muito avançado
     private AppDatabase(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         Log.d(TAG, "AppDatabase: construtor bd");
@@ -81,8 +75,8 @@ class AppDatabase extends SQLiteOpenHelper {
         sSQL = "CREATE TABLE " + ActivitiesContract.TABLE_NAME + " ("
                 + ActivitiesContract.Columns._ID + " INTEGER PRIMARY KEY NOT NULL, "
                 + ActivitiesContract.Columns.ACTIVITIES_NAME + " TEXT NOT NULL, "
-                + ActivitiesContract.Columns.ACTIVITIES_DESCRIPTION + " TEXT);";
-               /* + ActivitiesContract.Columns.ACTIVITIES_SORT_ORDER + "INTEGER);";*/
+                + ActivitiesContract.Columns.ACTIVITIES_DESCRIPTION + " TEXT, "
+                +ActivitiesContract.Columns.ACTIVITIES_SORT_ORDER + " INTEGER);";
 
         Log.d(TAG, "onCreate: sSQL");
         db.execSQL(sSQL);

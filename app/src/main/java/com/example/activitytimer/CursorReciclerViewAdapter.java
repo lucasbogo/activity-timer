@@ -60,6 +60,7 @@ class CursorReciclerViewAdapter extends RecyclerView.Adapter<CursorReciclerViewA
             holder.description.setText(activity.getDescription());
             holder.editButton.setVisibility(View.VISIBLE);  // TODO add onClick listener
             holder.deleteButton.setVisibility(View.VISIBLE); // TODO add onClick listener
+
             View.OnClickListener buttonListener = new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
