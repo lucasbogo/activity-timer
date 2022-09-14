@@ -26,7 +26,13 @@ public class MainActivity extends AppCompatActivity implements CursorReciclerVie
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        if (findViewById(R.id.task_details_container) != null) {
+            // The detail container view will be present only in the large-screen layouts (res/values-land and res/values-sw600dp).
+            // If this view is present, then the activity should be in two-pane mode.
+            mTwoPane = true;
+        }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -73,15 +79,13 @@ public class MainActivity extends AppCompatActivity implements CursorReciclerVie
     private void activityEditRequest(Activity activity) {
         Log.d(TAG, "activityEditRequest: starts");
         if (mTwoPane) {
-            Log.d(TAG, "activityEditRequest: in two-pane mode (tablet)");
         } else {
-            Log.d(TAG, "activityEditRequest: in single-pane mode (phone)");
-            //no modo 'single-pane', começa o detalhamento para o item Id selecionado
+
             Intent detailIntent = new Intent(this, AddEditActivity.class);
-            if (activity != null) { // editar a atividade
+            if (activity != null) {
                 detailIntent.putExtra(Activity.class.getSimpleName(), activity);
                 startActivity(detailIntent);
-            } else { // adicionar uma nota atividade
+            } else {
                 startActivity(detailIntent);
             }
         }
