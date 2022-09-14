@@ -3,16 +3,17 @@ package com.example.activitytimer;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-public class MainActivity extends AppCompatActivity implements CursorReciclerViewAdapter.OnActivityClickListener {
+public class MainActivity extends AppCompatActivity implements CursorReciclerViewAdapter.OnActivityClickListener,
+        AddEditActivityFragment.OnSaveClicked {
     private static final String TAG = "MainActivity";
 
 
@@ -35,6 +36,17 @@ public class MainActivity extends AppCompatActivity implements CursorReciclerVie
         }
     }
 
+    @Override
+    public void onSaveClicked() {
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        Fragment fragment = fragmentManager.findFragmentById(R.id.activity_detail_container);
+        if (fragment != null) {
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.remove(fragment);
+            fragmentTransaction.commit();
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

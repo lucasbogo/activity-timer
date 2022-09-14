@@ -2,6 +2,7 @@ package com.example.activitytimer;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 
@@ -30,11 +32,25 @@ public class AddEditActivityFragment extends Fragment {
     private OnSaveClicked mSaveListener = null;
 
     interface OnSaveClicked {
-    void onSaveClicked();
-}
+        void onSaveClicked();
+    }
 
     public AddEditActivityFragment() {
         Log.d(TAG, "AddEditActivityFragment: constructor called");
+
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        mSaveListener = (OnSaveClicked) getActivity();
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mSaveListener = null;
     }
 
     @Override
@@ -109,17 +125,18 @@ public class AddEditActivityFragment extends Fragment {
                             }
                             break;
                     }
-                    Log.d(TAG, "onClick: Done editing");
 
                     if (mSaveListener != null) {
                         mSaveListener.onSaveClicked();
                     }
                 }
             });
-            Log.d(TAG, "onCreateView: Exiting...");
 
             return view;
         }
+        return view;
     }
+}
+
 
 
