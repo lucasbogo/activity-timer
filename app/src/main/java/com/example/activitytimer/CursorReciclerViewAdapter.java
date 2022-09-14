@@ -1,6 +1,5 @@
 package com.example.activitytimer;
 
-import android.annotation.SuppressLint;
 import android.database.Cursor;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,16 +16,16 @@ class CursorReciclerViewAdapter extends RecyclerView.Adapter<CursorReciclerViewA
     private Cursor mCursor;
     private OnActivityClickListener mListener;
 
-    interface OnTaskClickListener {
-        void onEditClick(Activity activity);
 
+    interface OnActivityClickListener {
+        void onEditClick(Activity activity);
         void onDeleteClick(Activity activity);
     }
 
-    public CursorReciclerViewAdapter(Cursor cursor) {
+    public CursorReciclerViewAdapter(Cursor cursor, OnActivityClickListener listener) {
         Log.d(TAG, "CursorReciclerViewAdapter: construtor chamado");
         this.mCursor = cursor;
-        this.mListener = listener;
+        this.mListener = listener ;
     }
 
     @NonNull
@@ -52,7 +51,7 @@ class CursorReciclerViewAdapter extends RecyclerView.Adapter<CursorReciclerViewA
                 throw new IllegalStateException("Não foi possível mover o  cursor para a posição " + position);
             }
 
-            @SuppressLint("Range") final Activity activity = new Activity(mCursor.getLong(mCursor.getColumnIndex(ActivitiesContract.Columns._ID)),
+            final Activity activity = new Activity(mCursor.getLong(mCursor.getColumnIndex(ActivitiesContract.Columns._ID)),
                     mCursor.getString(mCursor.getColumnIndex(ActivitiesContract.Columns.ACTIVITIES_NAME)),
                     mCursor.getString(mCursor.getColumnIndex(ActivitiesContract.Columns.ACTIVITIES_DESCRIPTION)),
                     mCursor.getInt(mCursor.getColumnIndex(ActivitiesContract.Columns.ACTIVITIES_SORT_ORDER)));

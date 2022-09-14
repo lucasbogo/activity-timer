@@ -57,7 +57,7 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
         String[] projection = {ActivitiesContract.Columns._ID, ActivitiesContract.Columns.ACTIVITIES_NAME,
                 ActivitiesContract.Columns.ACTIVITIES_DESCRIPTION, ActivitiesContract.Columns.ACTIVITIES_SORT_ORDER};
 
-        String sortOrder = ActivitiesContract.Columns.ACTIVITIES_SORT_ORDER + "," + ActivitiesContract.Columns.ACTIVITIES_NAME;
+        String sortOrder = ActivitiesContract.Columns.ACTIVITIES_SORT_ORDER + "," + ActivitiesContract.Columns.ACTIVITIES_NAME + " COLLATE NO CASE";
 
         switch (id) {
             case LOADER_ID:
