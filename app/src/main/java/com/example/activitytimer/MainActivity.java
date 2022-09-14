@@ -9,6 +9,8 @@ import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 public class MainActivity extends AppCompatActivity implements CursorReciclerViewAdapter.OnActivityClickListener {
     private static final String TAG = "MainActivity";
@@ -77,14 +79,21 @@ public class MainActivity extends AppCompatActivity implements CursorReciclerVie
     }
 
     private void activityEditRequest(Activity activity) {
-        Log.d(TAG, "activityEditRequest: starts");
-        if (mTwoPane) {
-        } else {
 
+        if (mTwoPane) {
+            AddEditActivityFragment fragment = new AddEditActivityFragment();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.add(R.id.activity_detail_container, fragment);
+            fragmentTransaction.commit();
+
+        } else {
             Intent detailIntent = new Intent(this, AddEditActivity.class);
+
             if (activity != null) {
                 detailIntent.putExtra(Activity.class.getSimpleName(), activity);
                 startActivity(detailIntent);
+
             } else {
                 startActivity(detailIntent);
             }
