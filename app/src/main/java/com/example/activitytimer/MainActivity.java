@@ -62,6 +62,16 @@ public class MainActivity extends AppCompatActivity implements CursorReciclerVie
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onEditClick(Activity activity) {
+        activityEditRequest(activity);
+    }
+
+    @Override
+    public void onDeleteClick(Activity activity) {
+
+    }
+
     private void activityEditRequest(Activity activity) {
         Log.d(TAG, "activityEditRequest: starts");
         if (mTwoPane) {
@@ -79,13 +89,5 @@ public class MainActivity extends AppCompatActivity implements CursorReciclerVie
         }
     }
 
-    @Override
-    public void onEditClick(Activity activity) {
 
-    }
-
-    @Override
-    public void onDeleteClick(Activity activity) {
-
-    }
 }

@@ -19,13 +19,14 @@ class CursorReciclerViewAdapter extends RecyclerView.Adapter<CursorReciclerViewA
 
     interface OnActivityClickListener {
         void onEditClick(Activity activity);
+
         void onDeleteClick(Activity activity);
     }
 
     public CursorReciclerViewAdapter(Cursor cursor, OnActivityClickListener listener) {
         Log.d(TAG, "CursorReciclerViewAdapter: construtor chamado");
         this.mCursor = cursor;
-        this.mListener = listener ;
+        this.mListener = listener;
     }
 
     @NonNull
