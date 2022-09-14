@@ -20,5 +20,7 @@
     <string name="title_activity_add_edit">Adicionar e Editar Atividade</string>
     <string name="instructions_heading">Instruções</string>
     <string name="instructions">Use o botão (+) na barra de ferramentas acima para criar novas atividades.\n\n Atividades com numero baixo ficarão na parte superior da lista. Atividades com o mesmo numero ficarão ordenados alfabeticamente.\n\n Tocar em cima de uma atividade acionará o cronômetro para a atividade tocada (e irá parar o cronômetro para a ativade tocada anteriormente). \n\nCada atividade possui os botões Editar e Deletar onde será possível alterar ou excluir os detalhes da atividade e a ativadade em sí.</string>
+    <string name="ok">ok</string>
+    <string name="cancel">cancelar</string>
 
 </resources>
