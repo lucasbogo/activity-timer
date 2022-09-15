@@ -11,5 +11,5 @@ adapter customizado.
 - ActionModeMulti
 - Dialog Customizado
 
-#### Resultato :
+## Resultado :
 - O banco de dados funcionou. Consegui inserir, editar e excluir atividades. Portanto, o resultado aqui é parcial: implementei a funcionalide principal (CRUD com Sqlite). Ou seja, não consegui implementar as outras fucionalidades do enunciado devido à falta de tempo; não consigo resolver alguns bugs que surgiram após eu excluir alguns *fragments nativos* (first and second). Terei que recomeçar o projeto... Como preciso começar o Projeto Integrador 2, entrego assim mesmo, infelizmente.
